@@ -10,7 +10,7 @@ RUN apk add --update curl \
 RUN rm -rf ~/* \
   && rm -rf /var/cache/apk/*
 
-ADD docker-entrypoint.sh /
+ADD redis-server/docker-entrypoint.sh /
 
 WORKDIR /data
 
