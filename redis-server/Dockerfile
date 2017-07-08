@@ -10,12 +10,12 @@ RUN apk add --update curl \
 RUN rm -rf ~/* \
   && rm -rf /var/cache/apk/*
 
-ADD redis-server/docker-entrypoint.sh /
+ADD docker-entrypoint.sh /
 
 WORKDIR /data
 
 EXPOSE 6379 26379
 
-ENTRYPOINT ['/docker-entrypoint.sh']
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ['redis-server', '/usr/local/etc/redis/redis.conf']
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
