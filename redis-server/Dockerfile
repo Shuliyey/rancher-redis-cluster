@@ -18,4 +18,4 @@ EXPOSE 6379 26379
 
 ENTRYPOINT ['/docker-entrypoint.sh']
 
-RUN ['redis-server', '/usr/local/etc/redis/redis.conf']
+CMD ['redis-server', '/usr/local/etc/redis/redis.conf']
