@@ -19,7 +19,7 @@ ADD docker-entrypoint.sh /
 
 WORKDIR /data
 
-EXPOSE 6379 26379
+EXPOSE 6379 16379 26379
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
