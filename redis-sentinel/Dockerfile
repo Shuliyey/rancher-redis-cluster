@@ -1,4 +1,4 @@
-FROM redis:alpine
+FROM redis
 
 MAINTAINER Zeyu Ye <Shuliyey@gmail.com>
 
