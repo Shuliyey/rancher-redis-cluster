@@ -14,7 +14,7 @@ RUN apt-get update \
   && chmod +x /usr/local/bin/giddyup
 
 RUN rm -rf ~/* \
-  && rm -rf /var/cache/apk/*
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD docker-entrypoint.sh /
 

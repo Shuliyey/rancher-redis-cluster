@@ -10,13 +10,13 @@ my_ip=`echo -n $(curl -s http://rancher-metadata/latest/self/container/primary_i
 master_ip=$(leader_ip $stack_name redis-server)
 
 sed -i -E "s/^ *bind +.*$/bind 0.0.0.0/g" /usr/local/etc/redis/redis.conf
-sed -i -E "s/^ *# +cluster-enabled +.*$/cluster-enabled yes/g" /usr/local/etc/redis/redis.conf
 sed -i -E "s/^ *# +cluster-config-file +(.*)$/cluster-config-file \1/g" /usr/local/etc/redis/redis.conf
 sed -i -E "s/^ *# +cluster-node-timeout +(.*)$/cluster-node-timeout \1/g" /usr/local/etc/redis/redis.conf
 sed -i -E "s/^ *appendonly +.*$/appendonly yes/g" /usr/local/etc/redis/redis.conf
 
 if [ "$my_ip" == "$master_ip" ]
 then
+  sed -i -E "s/^ *# +cluster-enabled +.*$/cluster-enabled yes/g" /usr/local/etc/redis/redis.conf
   echo "i am the leader"
 else
   port=`echo -n $(grep -E "^ *port +.*$" /usr/local/etc/redis/redis.conf | sed -E "s/^ *port +(.*)$/\1/g")`
