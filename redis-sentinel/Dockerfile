@@ -5,7 +5,7 @@ MAINTAINER Zeyu Ye <Shuliyey@gmail.com>
 ARG GIDDYUP_VERSION=0.17.1
 
 RUN apt-get update \
-  && apt-get install -y curl openssl ca-certificates \
+  && apt-get install -y curl openssl ca-certificates wget \
   && update-ca-certificates \
   && mkdir -p /usr/local/etc/redis \
   && cd /usr/local/etc/redis \
