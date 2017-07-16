@@ -1,0 +1,22 @@
+version: '2'
+services:
+  redis-server:
+    scale: ${server_instances_num}
+    retain_ip: true
+    health_check:
+      port: 6379
+      interval: 2000
+      strategy: recreate
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000
+  redis-sentinel:
+    scale: ${sentinel_instances_num}
+    retain_ip: true
+    health_check:
+      port: 26379
+      interval: 2000
+      strategy: recreate
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000

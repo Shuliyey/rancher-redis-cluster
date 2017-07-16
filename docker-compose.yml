@@ -1,0 +1,52 @@
+version: '2'
+services:
+  redis-server:
+    image: shuliyey/rancher-redis-cluster:rancher-server
+    restart: always
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: redis-server-data
+    volumes_from:
+      - redis-server-data
+  redis-sentinel:
+    image: shuliyey/rancher-redis-cluster:rancher-sentinel
+    restart: always
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: redis-sentinel-data
+    volumes_from:
+      - redis-sentinel-data
+  redis-server-data:
+    network_mode: none
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+    volumes:
+      - redis-server-data-volume:/data
+    entrypoint: /bin/true
+    image: busybox
+  redis-sentinel-data:
+    network_mode: none
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: ${host_label}
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+    volumes:
+      - redis-sentinel-data-volume:/data
+    entrypoint: /bin/true
+    image: busybox
+
+volumes:
+  redis-server-data-volume:
+    driver: local
+    per_container: true
+  redis-sentinel-data-volume:
+    driver: local
+    per_container: true
