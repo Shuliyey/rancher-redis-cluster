@@ -1,7 +1,7 @@
 version: '2'
 services:
   redis-server:
-    image: shuliyey/rancher-redis-cluster:rancher-server
+    image: shuliyey/rancher-redis-cluster:redis-server
     restart: always
     labels:
       io.rancher.container.pull_image: always
@@ -11,7 +11,7 @@ services:
     volumes_from:
       - redis-server-data
   redis-sentinel:
-    image: shuliyey/rancher-redis-cluster:rancher-sentinel
+    image: shuliyey/rancher-redis-cluster:redis-sentinel
     restart: always
     labels:
       io.rancher.container.pull_image: always
