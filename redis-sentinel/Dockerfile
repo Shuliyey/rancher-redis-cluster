@@ -9,7 +9,7 @@ RUN apt-get update \
   && update-ca-certificates \
   && mkdir -p /usr/local/etc/redis \
   && cd /usr/local/etc/redis \
-  && echo 511 > /proc/sys/net/core/somaxconn \
+  && ((grep -E "^ *net.core.somaxconn *= *.*$" /etc/sysctl.conf && sed -i -E "s/^ *net.core.somaxconn *= *.*$/net.core.somaxconn=511/g" /etc/sysctl.conf) || echo "net.core.somaxconn=511" >> /etc/sysctl.conf) \
   && ((grep -E "^ *vm.overcommit_memory *= *.*$" /etc/sysctl.conf && sed -i -E "s/^ *vm.overcommit_memory *= *.*$/vm.overcommit_memory=1/g" /etc/sysctl.conf) || echo "vm.overcommit_memory=1" >> /etc/sysctl.conf) \
   && wget http://download.redis.io/redis-stable/sentinel.conf \
   && chown redis:redis /usr/local/etc/redis/sentinel.conf \
