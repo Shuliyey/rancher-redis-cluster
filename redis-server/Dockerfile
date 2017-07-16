@@ -10,7 +10,6 @@ RUN apt-get update \
   && mkdir -p /usr/local/etc/redis \
   && cd /usr/local/etc/redis \
   && wget http://download.redis.io/redis-stable/redis.conf \
-  && echo never > /sys/kernel/mm/transparent_hugepage/enabled \
   && echo 511 > /proc/sys/net/core/somaxconn \
   && ((grep -E "^ *vm.overcommit_memory *= *.*$" /etc/sysctl.conf && sed -i -E "s/^ *vm.overcommit_memory *= *.*$/vm.overcommit_memory=1/g" /etc/sysctl.conf) || echo "vm.overcommit_memory=1" >> /etc/sysctl.conf) \
   && wget https://github.com/rancher/giddyup/releases/download/v${GIDDYUP_VERSION}/giddyup -P /usr/local/bin \
