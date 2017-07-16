@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function leader_ip {
   echo -n $(curl -s http://rancher-metadata/latest/stacks/$1/services/$2/containers/0/primary_ip)
