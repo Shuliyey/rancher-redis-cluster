@@ -3,6 +3,8 @@ services:
   redis-server:
     image: shuliyey/rancher-redis-cluster:redis-server
     restart: always
+    sysctls:
+      - net.core.somaxconn=511
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${host_label}
@@ -13,6 +15,8 @@ services:
   redis-sentinel:
     image: shuliyey/rancher-redis-cluster:redis-sentinel
     restart: always
+    sysctls:
+      - net.core.somaxconn=511
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: ${host_label}
