@@ -2,7 +2,7 @@ FROM redis
 
 MAINTAINER Zeyu Ye <Shuliyey@gmail.com>
 
-ARG GIDDYUP_VERSION=0.17.1
+ARG GIDDYUP_VERSION=0.19.0
 
 RUN apt-get update \
   && apt-get install -y curl openssl ca-certificates wget \
