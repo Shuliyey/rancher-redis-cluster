@@ -16,6 +16,7 @@ sed -i -E "s/^ *appendonly +.*$/appendonly yes/g" /usr/local/etc/redis/redis.con
 
 if [ "$my_ip" == "$master_ip" ]
 then
+  sed -i -E "s/^ *slaveof +([^ ]*)$/#slaveof \1/g" /usr/local/etc/redis/redis.conf
   sed -i -E "s/^ *# +cluster-enabled +.*$/cluster-enabled yes/g" /usr/local/etc/redis/redis.conf
   echo "i am the leader"
 else
